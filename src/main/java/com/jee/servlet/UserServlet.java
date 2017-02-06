@@ -5,11 +5,11 @@ import com.jee.bean.UserBean;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +24,12 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         if (req.getParameter("list") != null) {
-            List<User> allUser = userBean.getAll();
+            List<User> allUser = null;
+            try {
+                allUser = userBean.getAll();
+            } catch (Exception e) {
+                allUser = new ArrayList<>();
+            }
             req.setAttribute("users", allUser);
             req.getRequestDispatcher("user/list.jsp").forward(req, resp);
         } else if (req.getParameter("edit") != null) {
@@ -43,8 +48,7 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
@@ -58,7 +62,11 @@ public class UserServlet extends HttpServlet {
             user.setName(name);
             userBean.update(user);
         } else {
-            userBean.add(new User(name, lastName, age));
+            try {
+                userBean.add(new User(name, lastName, age));
+            } catch (Exception ignore) {
+                System.out.println(ignore.getLocalizedMessage());
+            }
         }
         resp.sendRedirect("list");
     }

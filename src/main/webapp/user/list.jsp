@@ -6,12 +6,13 @@
 </head>
 <body>
 
-<h3>Все пользователи:</h3>(<a href="add">добавить</a>)
+<h3>Все пользователи:</h3>(<a href="${pageContext.request.contextPath}/user/add.jsp">Add</a>)
 <ol>
   <c:forEach items="${users}" var="user">
     <li>
         ${user.name} ${user.lastName} - ${user.age}
-      <a href="add?edit=${user.id}">редактировать</a> | <a href="delete?id=${user.id}">удалить</a>
+      <a href="${pageContext.request.contextPath}/user/add.jsp?edit=${user.id}">Edit</a>
+          | <a href="${pageContext.request.contextPath}/delete?id=${user.id}">Remove</a>
     </li>
   </c:forEach>
 </ol>

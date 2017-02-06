@@ -7,10 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title></title>
-  </head>
-  <body>
-    <p>Hello mvn!</p>
-  </body>
+</head>
+<body style="margin-left: 40px; margin-top: 30px;">
+<h1 style="color: #4CAF50; margin: 25px;">JEE Sampler</h1>
+<ul class="index">
+    <li><a href="${pageContext.request.contextPath}/user?list=true" class="main">Test datasource</a></li>
+</ul>
+</body>
 </html>

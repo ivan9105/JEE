@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    font-size: medium;
+}
+
+a {
+    color: #e33b06;
+}
+
+a.main {
+    color: #666666;
+    text-decoration: none;
+    font-size: large;
+}
+
+a:hover.main {
+    color: #222222;
+    text-decoration: none;
+    font-size: large;
+}
+
+ul.index li {
+    margin: 10px;
+}
