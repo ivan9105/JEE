@@ -1,7 +1,7 @@
 package com.jee.servlet;
 
-import com.jee.User;
 import com.jee.bean.UserBean;
+import com.jee.model.User;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

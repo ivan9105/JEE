@@ -1,4 +1,4 @@
-package com.jee;
+package com.jee.model;
 
 import javax.persistence.*;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by Иван on 05.02.2017.
  */
 @Entity(name = "users")
-@NamedQuery(name = "User.getAll", query = "select u from com.jee.User u")
+@NamedQuery(name = "User.getAll", query = "select u from com.jee.model.User u")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -1,6 +1,6 @@
 package com.jee.bean;
 
-import com.jee.User;
+import com.jee.model.User;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
