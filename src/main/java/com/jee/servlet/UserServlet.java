@@ -37,14 +37,14 @@ public class UserServlet extends HttpServlet {
             User user = userBean.get(id);
             req.setAttribute("user", user);
         } else if (req.getParameter("delete") != null) {
-            if (req.getParameter("id") != null && !Objects.equals(req.getParameter("id"), "")) {
-                long id = Long.valueOf(req.getParameter("id"));
+            long id = Long.valueOf(req.getParameter("delete"));
+            try {
                 userBean.delete(id);
+            } catch (Exception ignore) {
             }
-            resp.sendRedirect("list");
-        } else {
-            req.getRequestDispatcher("user/add.jsp").forward(req, resp);
+            req.getRequestDispatcher("user/list.jsp").forward(req, resp);
         }
+        req.getRequestDispatcher("user/add.jsp").forward(req, resp);
     }
 
     @Override
@@ -60,7 +60,10 @@ public class UserServlet extends HttpServlet {
             user.setAge(age);
             user.setLastName(lastName);
             user.setName(name);
-            userBean.update(user);
+            try {
+                userBean.update(user);
+            } catch (Exception ignore) {
+            }
         } else {
             try {
                 userBean.add(new User(name, lastName, age));
@@ -68,6 +71,6 @@ public class UserServlet extends HttpServlet {
                 System.out.println(ignore.getLocalizedMessage());
             }
         }
-        resp.sendRedirect("list");
+        resp.sendRedirect("user?list=true");
     }
 }

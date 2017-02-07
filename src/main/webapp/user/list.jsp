@@ -11,8 +11,8 @@
   <c:forEach items="${users}" var="user">
     <li>
         ${user.name} ${user.lastName} - ${user.age}
-      <a href="${pageContext.request.contextPath}/user/add.jsp?edit=${user.id}">Edit</a>
-          | <a href="${pageContext.request.contextPath}/delete?id=${user.id}">Remove</a>
+      <a href="${pageContext.request.contextPath}/user?edit=${user.id}">Edit</a>
+          | <a href="${pageContext.request.contextPath}/user?delete=${user.id}">Remove</a>
     </li>
   </c:forEach>
 </ol>

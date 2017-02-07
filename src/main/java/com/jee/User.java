@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by Иван on 05.02.2017.
  */
 @Entity(name = "users")
-@NamedQuery(name = "User.getAll", query = "from com.jee.User u")
+@NamedQuery(name = "User.getAll", query = "select u from com.jee.User u")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -53,5 +53,13 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

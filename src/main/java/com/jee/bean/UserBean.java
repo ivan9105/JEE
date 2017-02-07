@@ -13,7 +13,7 @@ import javax.transaction.UserTransaction;
 import java.util.List;
 
 /**
- * Created by Иван on 05.02.2017.
+ * Created by пїЅпїЅпїЅпїЅ on 05.02.2017.
  */
 @Stateless
 @TransactionManagement(value = TransactionManagementType.BEAN)
@@ -40,12 +40,26 @@ public class UserBean {
         return em.find(User.class, id);
     }
 
-    public void update(User user) {
-        em.merge(user);
+    public void update(User user) throws Exception {
+        try {
+            utx.begin();
+            em.merge(user);
+            utx.commit();
+        } catch (Exception ex) {
+            utx.rollback();
+            throw ex;
+        }
     }
 
-    public void delete(long id) {
-        em.remove(get(id));
+    public void delete(long id) throws Exception {
+        try {
+            utx.begin();
+            em.remove(get(id));
+            utx.commit();
+        } catch (Exception ex) {
+            utx.rollback();
+            throw ex;
+        }
     }
 
     public List<User> getAll() throws Exception {

@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath}/user" method="post">
+<form action="${pageContext.request.contextPath}/user?list=true" method="post">
   <label for="name">Введите имя:
     <input type="text" id="name" value="${user.name}" name="name" />
   </label>  <br />
