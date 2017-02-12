@@ -15,6 +15,7 @@
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
             <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.SunONETransactionManagerLookup" />
             <property name="hibernate.current_session_context_class" value="thread"/>
+            <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

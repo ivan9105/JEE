@@ -36,6 +36,7 @@ public class UserServlet extends HttpServlet {
             long id = Long.valueOf(req.getParameter("edit"));
             User user = userBean.get(id);
             req.setAttribute("user", user);
+            req.getRequestDispatcher("user/add.jsp").forward(req, resp);
         } else if (req.getParameter("delete") != null) {
             long id = Long.valueOf(req.getParameter("delete"));
             try {
@@ -43,8 +44,9 @@ public class UserServlet extends HttpServlet {
             } catch (Exception ignore) {
             }
             req.getRequestDispatcher("user/list.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("user/add.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("user/add.jsp").forward(req, resp);
     }
 
     @Override
