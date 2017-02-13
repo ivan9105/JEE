@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * Created by Иван on 11.02.2017.
  */
-@Stateful
+@Stateless(name = "UserMandatoryTransactionBean")
 @TransactionManagement(value = TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
-public class UserTransactionBean {
+public class UserMandatoryTransactionBean {
     @PersistenceContext(unitName = "DEV_MODE")
     private EntityManager em;
 

@@ -28,7 +28,7 @@ public class BaseTestSupport {
     protected void createContainer() throws NamingException {
         Map<String, Object> properties = new HashMap<String, Object>();
         //properties.put(EJBContainer.MODULES, new File("build/jar"));
-        properties.put(EJBContainer.MODULES, new File("target/classes"));
+        properties.put(EJBContainer.MODULES, new File("target/JEE"));
         ejbContainer = EJBContainer.createEJBContainer(properties);
     }
 

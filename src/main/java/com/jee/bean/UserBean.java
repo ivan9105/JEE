@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by ���� on 05.02.2017.
  */
-@Stateless
+@Stateless(name = "UserBean")
 @TransactionManagement(value = TransactionManagementType.BEAN)
 public class UserBean {
     @PersistenceContext(unitName = "DEV_MODE")
@@ -23,7 +23,6 @@ public class UserBean {
 
     @Resource
     private UserTransaction utx;
-
 
     public void add(User user) throws Exception {
         try {

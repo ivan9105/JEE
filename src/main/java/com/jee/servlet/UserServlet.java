@@ -1,6 +1,8 @@
 package com.jee.servlet;
 
+import com.jee.bean.TransactionCaller;
 import com.jee.bean.UserBean;
+import com.jee.bean.UserMandatoryTransactionBean;
 import com.jee.model.User;
 
 import javax.ejb.EJB;
@@ -19,6 +21,9 @@ import java.util.Objects;
 public class UserServlet extends HttpServlet {
     @EJB
     private UserBean userBean;
+
+    @EJB
+    private TransactionCaller caller;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -44,6 +49,12 @@ public class UserServlet extends HttpServlet {
             } catch (Exception ignore) {
             }
             req.getRequestDispatcher("user/list.jsp").forward(req, resp);
+        } else if (req.getParameter("test") != null) {
+            try {
+                caller.call(UserMandatoryTransactionBean.class, "addUser", new User("Test", "test", 1));
+            } catch (Exception e) {
+                System.out.println(e.getLocalizedMessage());
+            }
         } else {
             req.getRequestDispatcher("user/add.jsp").forward(req, resp);
         }

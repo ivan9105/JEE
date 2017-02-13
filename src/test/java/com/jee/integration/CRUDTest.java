@@ -17,11 +17,11 @@ public class CRUDTest extends BaseTestSupport {
     @Before
     public void setUp() throws NamingException {
         super.setUp();
-        userBean = (UserBean) ejbContainer.getContext().lookup("java:global/classes/UserBean");
+        userBean = (UserBean) ejbContainer.getContext().lookup("java:global/JEE/UserBean");
     }
 
     @Test
-    public void dowWork() throws Exception {
+    public void doWork() throws Exception {
         Assert.assertNotNull(userBean);
         User user = new User("Igor", "Kuchmin", 15);
         userBean.add(user);
