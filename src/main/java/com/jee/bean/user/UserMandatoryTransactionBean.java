@@ -1,4 +1,4 @@
-package com.jee.bean;
+package com.jee.bean.user;
 
 import com.jee.model.User;
 

@@ -1,8 +1,8 @@
 package com.jee.servlet;
 
-import com.jee.bean.TransactionCaller;
-import com.jee.bean.UserBean;
-import com.jee.bean.UserMandatoryTransactionBean;
+import com.jee.bean.user.UserBean;
+import com.jee.bean.user.UserMandatoryTransactionBean;
+import com.jee.bean.util.TransactionCaller;
 import com.jee.model.User;
 
 import javax.ejb.EJB;

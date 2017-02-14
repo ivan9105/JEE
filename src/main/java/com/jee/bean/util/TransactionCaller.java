@@ -1,4 +1,4 @@
-package com.jee.bean;
+package com.jee.bean.util;
 
 import javax.annotation.Resource;
 import javax.ejb.*;

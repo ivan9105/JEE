@@ -1,6 +1,6 @@
 package com.jee.integration;
 
-import com.jee.bean.UserBean;
+import com.jee.bean.user.UserBean;
 import com.jee.model.User;
 import junit.framework.Assert;
 import org.junit.Before;

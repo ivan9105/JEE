@@ -1,7 +1,7 @@
 package com.jee.integration;
 
-import com.jee.bean.TransactionCaller;
-import com.jee.bean.UserMandatoryTransactionBean;
+import com.jee.bean.user.UserMandatoryTransactionBean;
+import com.jee.bean.util.TransactionCaller;
 import com.jee.model.User;
 import junit.framework.Assert;
 import org.junit.Test;
