@@ -24,30 +24,35 @@ public class UserBean {
     @Resource
     private UserTransaction utx;
 
-    public void add(User user) throws Exception {
+    public User add(User user) throws Exception {
+        User res;
         try {
             utx.begin();
             em.persist(user);
+            res = em.find(User.class, user.getId());
             utx.commit();
         } catch (Exception ex) {
             utx.rollback();
             throw ex;
         }
+        return res;
     }
 
     public User get(long id) {
         return em.find(User.class, id);
     }
 
-    public void update(User user) throws Exception {
+    public User update(User user) throws Exception {
+        User res;
         try {
             utx.begin();
-            em.merge(user);
+            res = em.merge(user);
             utx.commit();
         } catch (Exception ex) {
             utx.rollback();
             throw ex;
         }
+        return res;
     }
 
     public void delete(long id) throws Exception {
