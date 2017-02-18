@@ -1,5 +1,6 @@
 package com.jee.rest;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,7 +16,7 @@ public class EchoRestService {
     }
 
     @POST
-    public String echo(String msg) {
+    public String echo(@FormParam("msg") String msg) {
         return String.format("ECHO: %s", msg);
     }
 }

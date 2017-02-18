@@ -55,8 +55,8 @@ public class UserRestService {
 
     @Path("/update/{id}")
     @POST
-    public UserDto update(@PathParam("id") long id, @QueryParam("age") String ageStr,
-                       @QueryParam("name") String name, @QueryParam("lastname") String lastName) throws Exception {
+    public UserDto update(@PathParam("id") long id, @FormParam("age") String ageStr,
+                       @FormParam("name") String name, @FormParam("lastname") String lastName) throws Exception {
         User user = userBean.get(id);
         user.setAge(getAge(ageStr));
         user.setName(name);
