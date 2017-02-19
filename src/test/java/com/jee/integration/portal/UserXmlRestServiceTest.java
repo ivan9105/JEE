@@ -14,33 +14,33 @@ import java.util.Map;
 /**
  * Created by Иван on 14.02.2017.
  */
-public class UserRestServiceTest extends PortalTestSupport {
+public class UserXmlRestServiceTest extends PortalTestSupport {
     @Test
     public void doWork() throws Exception {
         Map<String, String> params = new HashMap<>();
         params.put("age", "1");
         params.put("name", "TestName");
         params.put("lastname", "TestLastName");
-        String create = doPut("http://localhost:8080/JEE/rest/user/create", params);
+        String create = doPut("http://localhost:8080/JEE/rest/user/xml/create", params);
         UserDto dto = convertToDto(create);
 
         params.clear();
         params.put("age", "11");
         params.put("name", "2TestName");
         params.put("lastname", "TestLastName");
-        String update = doPost("http://localhost:8080/JEE/rest/user/update/" + dto.getId(), params);
+        String update = doPost("http://localhost:8080/JEE/rest/user/xml/update/" + dto.getId(), params);
         dto = convertToDto(update);
 
-        String show = doGet("http://localhost:8080/JEE/rest/user/show/" + dto.getId());
+        String show = doGet("http://localhost:8080/JEE/rest/user/xml/show/" + dto.getId());
         dto = convertToDto(show);
 
         Assert.assertEquals(dto.getAge(), 11);
         Assert.assertEquals(dto.getName(), "2TestName");
         Assert.assertEquals(dto.getLastname(), "TestLastName");
 
-        doDelete("http://localhost:8080/JEE/rest/user/delete/" + dto.getId());
+        doDelete("http://localhost:8080/JEE/rest/user/xml/delete/" + dto.getId());
 
-        show = doGet("http://localhost:8080/JEE/rest/user/show/" + dto.getId());
+        show = doGet("http://localhost:8080/JEE/rest/user/xml/show/" + dto.getId());
         Assert.assertEquals("", show);
     }
 

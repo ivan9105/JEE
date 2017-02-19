@@ -13,19 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Иван on 14.02.2017.
+ * Created by Иван on 19.02.2017.
  */
 @Stateless
-@Path("/user")
-@Produces(MediaType.TEXT_XML)
-public class UserRestService {
+@Path("/user/json")
+@Produces(MediaType.APPLICATION_JSON)
+public class UserJsonRestService {
     @EJB
     private UserBean userBean;
 
     @Path("/create")
     @PUT
     public UserDto createUser(@FormParam("age") String ageStr, @FormParam("name") String name,
-                           @FormParam("lastname") String lastName) throws Exception {
+                              @FormParam("lastname") String lastName) throws Exception {
         return DtoConverter.toUserDto(userBean.add(new User(name, lastName, getAge(ageStr))));
     }
 
@@ -56,7 +56,7 @@ public class UserRestService {
     @Path("/update/{id}")
     @POST
     public UserDto update(@PathParam("id") long id, @FormParam("age") String ageStr,
-                       @FormParam("name") String name, @FormParam("lastname") String lastName) throws Exception {
+                          @FormParam("name") String name, @FormParam("lastname") String lastName) throws Exception {
         User user = userBean.get(id);
         user.setAge(getAge(ageStr));
         user.setName(name);
