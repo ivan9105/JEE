@@ -24,9 +24,9 @@ public class UserRestService {
 
     @Path("/create")
     @PUT
-    public User createUser(@QueryParam("age") String ageStr, @QueryParam("name") String name,
-                           @QueryParam("lastname") String lastName) throws Exception {
-        return userBean.add(new User(name, lastName, getAge(ageStr)));
+    public UserDto createUser(@FormParam("age") String ageStr, @FormParam("name") String name,
+                           @FormParam("lastname") String lastName) throws Exception {
+        return DtoConverter.toUserDto(userBean.add(new User(name, lastName, getAge(ageStr))));
     }
 
     @Path("/list")
