@@ -17,7 +17,7 @@ public class CRUDTest extends BaseTestSupport {
     @Before
     public void setUp() throws NamingException {
         super.setUp();
-        userBean = (UserBean) ejbContainer.getContext().lookup("java:global/JEE/UserBean");
+        userBean = (UserBean) getBean(UserBean.class);
     }
 
     @Test

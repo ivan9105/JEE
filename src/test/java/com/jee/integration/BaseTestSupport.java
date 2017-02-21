@@ -25,9 +25,12 @@ public class BaseTestSupport {
         createContainer();
     }
 
+    protected Object getBean(Class cls) throws NamingException {
+        return ejbContainer.getContext().lookup("java:global/JEE/" + cls.getSimpleName());
+    }
+
     protected void createContainer() throws NamingException {
         Map<String, Object> properties = new HashMap<String, Object>();
-        //properties.put(EJBContainer.MODULES, new File("build/jar"));
         properties.put(EJBContainer.MODULES, new File("target/JEE"));
         ejbContainer = EJBContainer.createEJBContainer(properties);
     }

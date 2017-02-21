@@ -5,7 +5,6 @@ import com.jee.bean.util.PropertyRegistry;
 import junit.framework.Assert;
 import org.junit.Test;
 
-import javax.naming.Context;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Date;
@@ -16,9 +15,8 @@ import java.util.Date;
 public class SingletonBeanTest extends BaseTestSupport {
     @Test
     public void singletonOneTest() throws Exception {
-        Context context = ejbContainer.getContext();
-        ComponentRegistry one = (ComponentRegistry) context.lookup("java:global/JEE/ComponentRegistry");
-        ComponentRegistry two = (ComponentRegistry) context.lookup("java:global/JEE/ComponentRegistry");
+        ComponentRegistry one = (ComponentRegistry) getBean(ComponentRegistry.class);
+        ComponentRegistry two = (ComponentRegistry) getBean(ComponentRegistry.class);
 
         URI expectedUri = new URI("foo://bar/baz");
         one.setComponent(URI.class, expectedUri);
@@ -48,10 +46,8 @@ public class SingletonBeanTest extends BaseTestSupport {
 
     @Test
     public void singletonTwoTest() throws Exception {
-        Context context = ejbContainer.getContext();
-
-        PropertyRegistry one = (PropertyRegistry) context.lookup("java:global/JEE/PropertyRegistry");
-        PropertyRegistry two = (PropertyRegistry) context.lookup("java:global/JEE/PropertyRegistry");
+        PropertyRegistry one = (PropertyRegistry) getBean(PropertyRegistry.class);
+        PropertyRegistry two = (PropertyRegistry) getBean(PropertyRegistry.class);
 
         one.setProperty("url", "http://superbiz.org");
         String url = two.getProperty("url");

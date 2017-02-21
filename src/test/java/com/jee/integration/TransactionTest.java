@@ -19,9 +19,8 @@ public class TransactionTest extends BaseTestSupport {
     public void setUp() throws NamingException {
         super.setUp();
 
-        transactionCaller = (TransactionCaller) ejbContainer.getContext().lookup("java:global/JEE/TransactionCaller");
-        userMandatoryTransactionBean = (UserMandatoryTransactionBean)
-                ejbContainer.getContext().lookup("java:global/JEE/UserMandatoryTransactionBean");
+        transactionCaller = (TransactionCaller) getBean(TransactionCaller.class);
+        userMandatoryTransactionBean = (UserMandatoryTransactionBean) getBean(UserMandatoryTransactionBean.class);
     }
 
     @Test
