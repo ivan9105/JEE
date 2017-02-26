@@ -9,5 +9,8 @@
         <mapping class="com.jee.model.mapped_superclass.Publication"/>
         <mapping class="com.jee.model.mapped_superclass.Book"/>
         <mapping class="com.jee.model.mapped_superclass.BlogPost"/>
+        <mapping class="com.jee.model.table_per_class.SchoolUser"/>
+        <mapping class="com.jee.model.table_per_class.Student"/>
+        <mapping class="com.jee.model.table_per_class.Teacher"/>
     </session-factory>
 </hibernate-configuration>
