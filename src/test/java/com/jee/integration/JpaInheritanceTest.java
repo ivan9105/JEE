@@ -1,9 +1,12 @@
 package com.jee.integration;
 
 import com.jee.bean.util.DataManager;
+import com.jee.bean.util.SqlRunner;
 import com.jee.model.mapped_superclass.BlogPost;
 import com.jee.model.mapped_superclass.Book;
 import com.jee.model.mapped_superclass.Publication;
+import com.jee.model.single_table.Car;
+import com.jee.model.single_table.Motorcycle;
 import com.jee.model.table_per_class.SchoolUser;
 import com.jee.model.table_per_class.Student;
 import com.jee.model.table_per_class.Teacher;
@@ -12,25 +15,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.naming.NamingException;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Иван on 21.02.2017.
  */
 public class JpaInheritanceTest extends BaseTestSupport {
     private DataManager dataManager;
+    private SqlRunner sqlRunner;
 
     @Before
     public void setUp() throws NamingException {
         super.setUp();
         dataManager = (DataManager) getBean(DataManager.class);
+        sqlRunner = (SqlRunner) getBean(SqlRunner.class);
     }
 
     @Test
     public void doWork() throws Exception {
         mappedSuperclassTest();
         tablePerClassTest();
+        singleTableTest();
     }
 
     private void mappedSuperclassTest() throws Exception {
@@ -82,5 +87,35 @@ public class JpaInheritanceTest extends BaseTestSupport {
 
         dataManager.delete(student);
         dataManager.delete(teacher);
+    }
+
+    private void singleTableTest() throws Exception {
+        Car car = new Car();
+        car.setSpeed(1);
+        car.setWeight(1);
+        car.setWheelCount(1);
+        car.setDoorsCount(1);
+        car = (Car) dataManager.persist(car);
+
+        Motorcycle motorcycle = new Motorcycle();
+        motorcycle.setWheelCount(1);
+        motorcycle.setWeight(1);
+        motorcycle.setSpeed(1);
+        motorcycle.setSport(true);
+        motorcycle = (Motorcycle) dataManager.persist(motorcycle);
+
+        List<Map<String, Object>> list = sqlRunner.select("select * from vehicle");
+        Set<String> dtypes = new HashSet<>();
+        if (list != null) {
+            for (Map<String, Object> map : list) {
+                if (map.get("DTYPE") != null) {
+                    dtypes.add((String) map.get("DTYPE"));
+                }
+            }
+        }
+        Assert.assertTrue(dtypes.contains("Motorcycle") && dtypes.contains("Car"));
+
+        dataManager.delete(car);
+        dataManager.delete(motorcycle);
     }
 }

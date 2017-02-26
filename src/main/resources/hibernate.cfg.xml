@@ -12,5 +12,8 @@
         <mapping class="com.jee.model.table_per_class.SchoolUser"/>
         <mapping class="com.jee.model.table_per_class.Student"/>
         <mapping class="com.jee.model.table_per_class.Teacher"/>
+        <mapping class="com.jee.model.single_table.Vehicle"/>
+        <mapping class="com.jee.model.single_table.Car"/>
+        <mapping class="com.jee.model.single_table.Motorcycle"/>
     </session-factory>
 </hibernate-configuration>
