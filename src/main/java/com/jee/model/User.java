@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity(name = "users")
 @NamedQuery(name = "User.getAll", query = "select u from com.jee.model.User u")
-public class User {
+public class User implements StandardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "user_ID")
