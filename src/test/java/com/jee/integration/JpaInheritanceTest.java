@@ -3,6 +3,8 @@ package com.jee.integration;
 import com.jee.bean.util.DataManager;
 import com.jee.bean.util.SqlRunner;
 import com.jee.model.joined.Project;
+import com.jee.model.many_to_many.Customer;
+import com.jee.model.many_to_many.Product;
 import com.jee.model.mapped_superclass.BlogPost;
 import com.jee.model.mapped_superclass.Book;
 import com.jee.model.mapped_superclass.Publication;
@@ -38,6 +40,7 @@ public class JpaInheritanceTest extends BaseTestSupport {
         tablePerClassTest();
         singleTableTest();
         joinedTest();
+        manyToManyTest();
     }
 
     private void mappedSuperclassTest() throws Exception {
@@ -134,5 +137,25 @@ public class JpaInheritanceTest extends BaseTestSupport {
         Assert.assertNotNull(project.getName());
 
         dataManager.delete(project);
+    }
+
+    private void manyToManyTest() throws Exception {
+        Product product = new Product();
+        product = (Product) dataManager.persist(product);
+
+        Customer customer = new Customer();
+        customer = (Customer) dataManager.persist(customer);
+
+        product.setCustomers(Collections.singletonList(customer));
+        dataManager.merge(product);
+
+        product = (Product) dataManager.find(product);
+        customer = (Customer) dataManager.find(customer);
+
+        Assert.assertTrue(product.getCustomers() != null && product.getCustomers().size() == 1);
+        Assert.assertTrue(customer.getProducts() != null && customer.getProducts().size() == 1);
+
+        dataManager.delete(product);
+        dataManager.delete(customer);
     }
 }
