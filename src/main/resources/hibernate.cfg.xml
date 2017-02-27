@@ -15,5 +15,8 @@
         <mapping class="com.jee.model.single_table.Vehicle"/>
         <mapping class="com.jee.model.single_table.Car"/>
         <mapping class="com.jee.model.single_table.Motorcycle"/>
+        <mapping class="com.jee.model.joined.Module"/>
+        <mapping class="com.jee.model.joined.Project"/>
+        <mapping class="com.jee.model.joined.Course"/>
     </session-factory>
 </hibernate-configuration>

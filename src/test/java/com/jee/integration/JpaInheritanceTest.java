@@ -2,6 +2,7 @@ package com.jee.integration;
 
 import com.jee.bean.util.DataManager;
 import com.jee.bean.util.SqlRunner;
+import com.jee.model.joined.Project;
 import com.jee.model.mapped_superclass.BlogPost;
 import com.jee.model.mapped_superclass.Book;
 import com.jee.model.mapped_superclass.Publication;
@@ -36,6 +37,7 @@ public class JpaInheritanceTest extends BaseTestSupport {
         mappedSuperclassTest();
         tablePerClassTest();
         singleTableTest();
+        joinedTest();
     }
 
     private void mappedSuperclassTest() throws Exception {
@@ -117,5 +119,20 @@ public class JpaInheritanceTest extends BaseTestSupport {
 
         dataManager.delete(car);
         dataManager.delete(motorcycle);
+    }
+
+    private void joinedTest() throws Exception {
+        Project project = new Project();
+        project.setName("Project 1");
+        project.setDirection("Direction 1");
+        project = (Project) dataManager.persist(project);
+
+        List<Map<String, Object>> list = sqlRunner.select("select * from projects");
+        Assert.assertTrue(list.get(0).size() == 2);
+
+        project = (Project) dataManager.find(project);
+        Assert.assertNotNull(project.getName());
+
+        dataManager.delete(project);
     }
 }
