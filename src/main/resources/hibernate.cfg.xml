@@ -22,5 +22,7 @@
         <mapping class="com.jee.model.many_to_many.Product"/>
         <mapping class="com.jee.model.one_to_one.Job"/>
         <mapping class="com.jee.model.one_to_one.JobDetails"/>
+        <mapping class="com.jee.model.one_to_many.Stock"/>
+        <mapping class="com.jee.model.one_to_many.StockDailyRecord"/>
     </session-factory>
 </hibernate-configuration>

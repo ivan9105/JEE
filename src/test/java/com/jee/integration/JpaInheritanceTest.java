@@ -8,6 +8,8 @@ import com.jee.model.many_to_many.Product;
 import com.jee.model.mapped_superclass.BlogPost;
 import com.jee.model.mapped_superclass.Book;
 import com.jee.model.mapped_superclass.Publication;
+import com.jee.model.one_to_many.Stock;
+import com.jee.model.one_to_many.StockDailyRecord;
 import com.jee.model.one_to_one.Job;
 import com.jee.model.one_to_one.JobDetails;
 import com.jee.model.single_table.Car;
@@ -44,6 +46,7 @@ public class JpaInheritanceTest extends BaseTestSupport {
         joinedTest();
         manyToManyTest();
         oneToOneTest();
+        manyToOne();
     }
 
     private void mappedSuperclassTest() throws Exception {
@@ -197,5 +200,24 @@ public class JpaInheritanceTest extends BaseTestSupport {
 
         dataManager.delete(job2);
         dataManager.delete(details2);
+    }
+
+    private void manyToOne() throws Exception {
+        Stock stock = new Stock();
+        stock.setName("Name");
+        stock.setCode("Code");
+        stock = (Stock) dataManager.persist(stock);
+
+        StockDailyRecord record = new StockDailyRecord();
+        record.setDate(new Date());
+        record.setStock(stock);
+        record = (StockDailyRecord) dataManager.persist(record);
+
+        stock = (Stock) dataManager.find(stock);
+
+        Assert.assertTrue(stock.getRecords() != null && stock.getRecords().size() == 1);
+
+        dataManager.delete(record);
+        dataManager.delete(stock);
     }
 }
