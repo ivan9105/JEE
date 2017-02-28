@@ -20,5 +20,7 @@
         <mapping class="com.jee.model.joined.Course"/>
         <mapping class="com.jee.model.many_to_many.Customer"/>
         <mapping class="com.jee.model.many_to_many.Product"/>
+        <mapping class="com.jee.model.one_to_one.Job"/>
+        <mapping class="com.jee.model.one_to_one.JobDetails"/>
     </session-factory>
 </hibernate-configuration>

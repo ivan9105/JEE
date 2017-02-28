@@ -8,6 +8,8 @@ import com.jee.model.many_to_many.Product;
 import com.jee.model.mapped_superclass.BlogPost;
 import com.jee.model.mapped_superclass.Book;
 import com.jee.model.mapped_superclass.Publication;
+import com.jee.model.one_to_one.Job;
+import com.jee.model.one_to_one.JobDetails;
 import com.jee.model.single_table.Car;
 import com.jee.model.single_table.Motorcycle;
 import com.jee.model.table_per_class.SchoolUser;
@@ -41,6 +43,7 @@ public class JpaInheritanceTest extends BaseTestSupport {
         singleTableTest();
         joinedTest();
         manyToManyTest();
+        oneToOneTest();
     }
 
     private void mappedSuperclassTest() throws Exception {
@@ -157,5 +160,42 @@ public class JpaInheritanceTest extends BaseTestSupport {
 
         dataManager.delete(product);
         dataManager.delete(customer);
+    }
+
+    private void oneToOneTest() throws Exception {
+        Job job1 = new Job();
+        job1 = (Job) dataManager.persist(job1);
+
+        JobDetails details1 = new JobDetails();
+        details1 = (JobDetails) dataManager.persist(details1);
+
+        details1.setJob(job1);
+        dataManager.merge(details1);
+
+        job1 = (Job) dataManager.find(job1);
+        details1 = (JobDetails) dataManager.find(details1);
+
+        Assert.assertTrue(job1.getDetails() != null);
+        Assert.assertTrue(details1.getJob() != null);
+
+        dataManager.delete(job1);
+        dataManager.delete(details1);
+
+        Job job2 = new Job();
+        job2 = (Job) dataManager.persist(job2);
+
+        JobDetails details2 = new JobDetails();
+        details2 = (JobDetails) dataManager.persist(details2);
+
+        job2.setDetails(details2);
+        try {
+            dataManager.merge(job2);
+            Assert.fail("Merge has not executed");
+        } catch (Exception ignore) {
+            //especially hibernate
+        }
+
+        dataManager.delete(job2);
+        dataManager.delete(details2);
     }
 }
