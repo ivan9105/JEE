@@ -2,6 +2,8 @@ package com.jee.integration;
 
 import com.jee.bean.util.DataManager;
 import com.jee.bean.util.SqlRunner;
+import com.jee.model.embedded.Address;
+import com.jee.model.embedded.Place;
 import com.jee.model.joined.Project;
 import com.jee.model.many_to_many.Customer;
 import com.jee.model.many_to_many.Product;
@@ -46,7 +48,8 @@ public class JpaInheritanceTest extends BaseTestSupport {
         joinedTest();
         manyToManyTest();
         oneToOneTest();
-        manyToOne();
+        manyToOneTest();
+        embeddableTest();
     }
 
     private void mappedSuperclassTest() throws Exception {
@@ -202,7 +205,7 @@ public class JpaInheritanceTest extends BaseTestSupport {
         dataManager.delete(details2);
     }
 
-    private void manyToOne() throws Exception {
+    private void manyToOneTest() throws Exception {
         Stock stock = new Stock();
         stock.setName("Name");
         stock.setCode("Code");
@@ -219,5 +222,26 @@ public class JpaInheritanceTest extends BaseTestSupport {
 
         dataManager.delete(record);
         dataManager.delete(stock);
+    }
+
+    private void embeddableTest() throws Exception {
+        Place place = new Place();
+        place.setCode("code");
+        place.setName("name");
+        place.setLatitude(1l);
+        place.setLongitude(1l);
+
+        Address address = new Address();
+        address.setCity("Samara");
+        address.setState("Russia");
+        address.setStreet("UK");
+        address.setZipCode("447");
+        place.setAddress(address);
+
+        dataManager.persist(place);
+        place = (Place) dataManager.find(place);
+
+        Assert.assertTrue(place.getAddress() != null && place.getAddress().getCity() != null);
+        dataManager.delete(place);
     }
 }
