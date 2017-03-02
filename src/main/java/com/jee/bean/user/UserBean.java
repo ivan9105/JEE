@@ -1,11 +1,14 @@
 package com.jee.bean.user;
 
+import com.jee.aop.ConstructorInterceptor;
+import com.jee.aop.MethodInterceptor;
 import com.jee.model.User;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -15,6 +18,7 @@ import java.util.List;
 /**
  * Created by ���� on 05.02.2017.
  */
+@Interceptors(ConstructorInterceptor.class)
 @Stateless(name = "UserBean")
 @TransactionManagement(value = TransactionManagementType.BEAN)
 public class UserBean {
@@ -24,6 +28,7 @@ public class UserBean {
     @Resource
     private UserTransaction utx;
 
+    @Interceptors(MethodInterceptor.class)
     public User add(User user) throws Exception {
         User res;
         try {
@@ -38,10 +43,12 @@ public class UserBean {
         return res;
     }
 
+    @Interceptors(MethodInterceptor.class)
     public User get(long id) {
         return em.find(User.class, id);
     }
 
+    @Interceptors(MethodInterceptor.class)
     public User update(User user) throws Exception {
         User res;
         try {
@@ -55,6 +62,7 @@ public class UserBean {
         return res;
     }
 
+    @Interceptors(MethodInterceptor.class)
     public void delete(long id) throws Exception {
         try {
             utx.begin();
@@ -66,6 +74,7 @@ public class UserBean {
         }
     }
 
+    @Interceptors(MethodInterceptor.class)
     public List<User> getAll() throws Exception {
         List<User> res;
         try {
