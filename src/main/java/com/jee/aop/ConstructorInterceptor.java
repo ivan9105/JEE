@@ -14,23 +14,23 @@ public class ConstructorInterceptor {
     private final static Logger logger = Logger.getLogger(ConstructorInterceptor.class);
 
     @AroundConstruct
-    public Object aroundConstructMethod(InvocationContext ic) throws Exception {
-        String target = ic.getConstructor().getName();
-        logger.info(String.format("Around construct: %s", target));
-        return ic;
+    public void aroundConstructMethod(InvocationContext ic) throws Exception {
+        String name = ic.getConstructor().getName();
+        logger.info(String.format("Around construct: %s", name));
+        ic.proceed();
     }
 
     @PreDestroy
-    public Object preDestroyMethod(InvocationContext ic) throws Exception {
-        String target = ic.getConstructor().getName();
+    public void preDestroyMethod(InvocationContext ic) throws Exception {
+        String target = ic.getTarget().toString();
         logger.info(String.format("Pre destroy: %s", target));
-        return ic;
+        ic.proceed();
     }
 
     @PostConstruct
-    public Object postConstructMethod(InvocationContext ic) throws Exception {
-        String target = ic.getConstructor().getName();
+    public void postConstructMethod(InvocationContext ic) throws Exception {
+        String target = ic.getTarget().toString();
         logger.info(String.format("Around construct: %s", target));
-        return ic;
+        ic.proceed();
     }
 }

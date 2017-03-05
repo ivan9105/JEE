@@ -14,6 +14,6 @@ public class MethodInterceptor {
     @AroundInvoke
     public Object interceptorMethod(InvocationContext ic) throws Exception {
         logger.info(String.format("Method: %s", ic.getMethod().getName()));
-        return ic;
+        return ic.proceed();
     }
 }
