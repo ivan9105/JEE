@@ -59,11 +59,13 @@ public class Tree234 {
                 for (Long key_ : keys) {
                     insert(key_);
                 }
+                return true;
             } else {
                 root = new Node();
                 for (Long key_ : keys) {
                     insert(key_);
                 }
+                return true;
             }
         }
         return false;
